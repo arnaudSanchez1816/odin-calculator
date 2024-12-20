@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap');
+
+html {
+    box-sizing: border-box;
+    font-family: Roboto, sans-serif;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.calculator {
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+    background-color: gray;
+    padding: 10px;
+
+    width: 400px;
+    height: 400px;
+}
+
+.input {
+    height: 100px;
+    background-color: white;
+    margin-bottom: 5px;
+    padding: 0 5px 0 5px;
+    display: flex;
+    align-items: center;
+    > span {
+        font-size: 3em;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        direction: rtl;
+    }
+}
+
+.controls {
+    display: flex;
+    height: 100%;
+    gap: 5px;
+}
+
+.numpad {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    gap: 5px;
+    flex: 1 1 75%;
+}
+
+.operators {
+    display: flex;
+    flex-flow: column wrap;
+    flex: 1 1 25%;
+    gap: 5px;
+}
+
+.control-button {
+    width: 32%;
+    flex: auto;
+    font-size: 1.5em;
+}
+
+.control-button.large {
+    width: 66%;
+}
+
+.operator {
+    height: 20%;
+    flex: auto;
+    font-size: 1.5em;
+}
+
+.operator.large{
+    height: 45%;
+}
+
+.italic {
+    font-style: italic;
+}

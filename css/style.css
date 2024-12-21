@@ -29,9 +29,10 @@ body {
     background-color: gray;
     padding: 10px;
 
-    height: 400px;
-    width: 400px;
+    min-height: 200px;
     min-width: 400px;
+    width: 400px;
+    height: 400px;
 }
 
 .input {

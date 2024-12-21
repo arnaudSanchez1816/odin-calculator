@@ -79,13 +79,11 @@ footer {
 .numpad {
     flex: 1 1 60%;
     padding: 0;
-    margin-left: -2px;
 }
 
 .operators {
     flex: 1 1 40%;
     padding: 0;
-    margin-right: -2px;
 }
 
 .operand {
@@ -120,4 +118,12 @@ a {
 
 a:hover {
     color: orange;
+}
+
+.pl-0 {
+    padding-left: 0px;
+}
+
+.pr-0 {
+    padding-right: 0px;
 }

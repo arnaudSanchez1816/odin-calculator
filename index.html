@@ -3,90 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Odin calculator</title>
 </head>
 <body>
-    <div class="calculator">
-        <div class="input">
-            <span>0</span>
-        </div>
-        <div class="controls grid">
-            <div class="numpad col-4 grid">
-                <div class="col-2">
-                    <button class="operator bold">C</button>
-                </div>
-                <div class="col-2">
-                    <button class="operator">(</button>
-                </div>
-                <div class="col-2">
-                    <button class="operator">)</button>
-                </div>
-                <div class="col-2">
-                    <button class="operand">7</button>
-                </div>
-                <div class="col-2">
-                    <button class="operand">8</button>
-                </div>
-                <div class="col-2">
-                    <button class="operand">9</button>
-                </div>
-                <div class="col-2">
-                    <button class="operand">4</button>
-                </div>
-                <div class="col-2">
-                    <button class="operand">5</button>
-                </div>
-                <div class="col-2">
-                    <button class="operand">6</button>
-                </div>
-                <div class="col-2">
-                    <button class="operand">1</button>
-                </div>
-                <div class="col-2">
-                    <button class="operand">2</button>
-                </div>
-                <div class="col-2">
-                    <button class="operand">3</button>
-                </div>
-                <div class="col-4">
-                    <button class="operand">0</button>
-                </div>
-                <div class="col-2">
-                    <button class="operand">.</button>
-                </div>
+    <div class="content">
+        <div class="calculator">
+            <div class="input">
+                <span>0</span>
             </div>
-            <div class="operators col-2 grid">
-                <div class="col-3">
-                    <button class="operator">%</button>
+            <div class="controls grid">
+                <div class="numpad col-4 grid">
+                    <div class="col-2">
+                        <button class="operator bold">C</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="operator">(</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="operator">)</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="operand">7</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="operand">8</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="operand">9</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="operand">4</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="operand">5</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="operand">6</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="operand">1</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="operand">2</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="operand">3</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="operand">0</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="operand">.</button>
+                    </div>
                 </div>
-                <div class="col-3">
-                    <button class="operator">mod</button>
-                </div>
-                <div class="col-3">
-                    <button class="operator"><span class="italic">x</span>²</button>
-                </div>
-                <div class="col-3">
-                    <button class="operator">&#8730;</button>
-                </div>
-                <div class="col-3">
-                    <button class="operator">&times;</button>
-                </div>
-                <div class="col-3">
-                    <button class="operator">&div;</button>
-                </div>
-                <div class="col-3">
-                    <button class="operator">&plus;</button>
-                </div>
-                <div class="col-3">
-                    <button class="operator">&minus;</button>
-                </div>
-                <div class="col">
-                    <button class="operator">=</button>
+                <div class="operators col-2 grid">
+                    <div class="col-3">
+                        <button class="operator">%</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="operator">mod</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="operator"><span class="italic">x</span>²</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="operator">&#8730;</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="operator">&times;</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="operator">&div;</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="operator">&plus;</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="operator">&minus;</button>
+                    </div>
+                    <div class="col">
+                        <button class="operator">=</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <footer>
+        2024 - 
+        <a href="https://github.com/arnaudSanchez1816/odin-calculator"><i class="fa fa-github" style="font-size:36px"></i></a>
+    </footer>
     <script src="js/script.js"></script>
 </body>
 </html>

@@ -9,30 +9,81 @@
 <body>
     <div class="calculator">
         <div class="input">
-            <span>000000000000000000000000000</span>
+            <span>0</span>
         </div>
-        <div class="controls">
-            <div class="numpad">
-                <button class="control-button">7</button>
-                <button class="control-button">8</button>
-                <button class="control-button">9</button>
-                <button class="control-button">4</button>
-                <button class="control-button">5</button>
-                <button class="control-button">6</button>
-                <button class="control-button">1</button>
-                <button class="control-button">2</button>
-                <button class="control-button">3</button>
-                <button class="control-button large">0</button>
-                <button class="control-button">.</button>
+        <div class="controls grid">
+            <div class="numpad col-4 grid">
+                <div class="col-2">
+                    <button class="operator bold">C</button>
+                </div>
+                <div class="col-2">
+                    <button class="operator">(</button>
+                </div>
+                <div class="col-2">
+                    <button class="operator">)</button>
+                </div>
+                <div class="col-2">
+                    <button class="operand">7</button>
+                </div>
+                <div class="col-2">
+                    <button class="operand">8</button>
+                </div>
+                <div class="col-2">
+                    <button class="operand">9</button>
+                </div>
+                <div class="col-2">
+                    <button class="operand">4</button>
+                </div>
+                <div class="col-2">
+                    <button class="operand">5</button>
+                </div>
+                <div class="col-2">
+                    <button class="operand">6</button>
+                </div>
+                <div class="col-2">
+                    <button class="operand">1</button>
+                </div>
+                <div class="col-2">
+                    <button class="operand">2</button>
+                </div>
+                <div class="col-2">
+                    <button class="operand">3</button>
+                </div>
+                <div class="col-4">
+                    <button class="operand">0</button>
+                </div>
+                <div class="col-2">
+                    <button class="operand">.</button>
+                </div>
             </div>
-            <div class="operators">
-                <button class="operator" type="button">+</button>
-                <button class="operator" type="button">/</button>
-                <button class="operator" type="button">-</button>
-                <button class="operator" type="button">*</button>
-                <button class="operator" type="button"><span class="italic">x</span>²</button>
-                <button class="operator" type="button">√</button>
-                <button class="operator large" type="button">=</button>
+            <div class="operators col-2 grid">
+                <div class="col-3">
+                    <button class="operator">%</button>
+                </div>
+                <div class="col-3">
+                    <button class="operator">mod</button>
+                </div>
+                <div class="col-3">
+                    <button class="operator"><span class="italic">x</span>²</button>
+                </div>
+                <div class="col-3">
+                    <button class="operator">&#8730;</button>
+                </div>
+                <div class="col-3">
+                    <button class="operator">&times;</button>
+                </div>
+                <div class="col-3">
+                    <button class="operator">&div;</button>
+                </div>
+                <div class="col-3">
+                    <button class="operator">&plus;</button>
+                </div>
+                <div class="col-3">
+                    <button class="operator">&minus;</button>
+                </div>
+                <div class="col">
+                    <button class="operator">=</button>
+                </div>
             </div>
         </div>
     </div>

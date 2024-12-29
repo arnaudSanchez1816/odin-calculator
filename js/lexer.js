@@ -25,6 +25,7 @@ function tokenize(text) {
 
     while(lexer.currentCharIndex < lexer.text.length) {
         let tokenType = TOKEN_TYPES.unknown;
+        const index = lexer.currentCharIndex;
         const char = lexer.currentChar();
 
         if(isCharNumber(char) || char === "."){
@@ -34,7 +35,13 @@ function tokenize(text) {
         else if(SYMBOLS_TOKENS_LOOKUP.get(char)) {
             tokenType = SYMBOLS_TOKENS_LOOKUP.get(char);
         }
-        else if(char == " ") {
+        // Modulo special case
+        // TODO : Find a better way to handle multiple chars symbols
+        else if(char === "m") {
+            tokens.push(getModuloToken(lexer));
+            continue;
+        }
+        else if(char === " ") {
             lexer.advance();
             continue;
         }
@@ -63,8 +70,29 @@ function getNumberToken(lexer) {
     return createToken(TOKEN_TYPES.number, number); 
 }
 
+function getModuloToken(lexer) {
+    const MOD_SYMBOL = "mod";
+    let tokenText = "";
+    if(lexer.currentCharIndex + 2 >= lexer.text.length) {
+        // There is not enough characters left to make a modulo token
+        return;
+    }
+
+    do {
+        tokenText += lexer.currentChar();
+        lexer.advance();
+    } while(MOD_SYMBOL.startsWith(tokenText) && tokenText.length < MOD_SYMBOL.length);
+
+    if(tokenText === MOD_SYMBOL) {
+        return createToken(TOKEN_TYPES.mod, tokenText);
+    }
+
+    console.error(`Unknown symbol ${tokenText}`);
+    return createToken(TOKEN_TYPES.unknown, tokenText);
+}
+
 const TOKEN_TYPES = {
-    unknown : null,
+    unknown : "TOKEN_UNKNOWN",
     eof : "TOKEN_EOF",
     number : "TOKEN_NUMBER",
     plus : "TOKEN_PLUS",

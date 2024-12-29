@@ -48,4 +48,15 @@ describe("tokenize", () => {
         ];
         expect(tokenize(everySymbolsExp)).toEqual(tokens);
     });
+    test("Modulo token", () => {
+        const tokens = [
+            {tokenType : "TOKEN_MODULO", text : "mod"},
+            {tokenType : "TOKEN_UNKNOWN", text : "me"},
+            {tokenType : "TOKEN_UNKNOWN", text : "d"},
+            {tokenType : "TOKEN_UNKNOWN", text : "mol"},
+            {tokenType : "TOKEN_UNKNOWN", text : "d"},
+            {tokenType : "TOKEN_EOF", text : ""},
+        ];
+        expect(tokenize("modmedmold")).toEqual(tokens);
+    });
 });

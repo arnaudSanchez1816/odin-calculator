@@ -1,0 +1,32 @@
+{
+    "name": "odin-calculator",
+    "version": "1.0.0",
+    "description": "Odin calculator project",
+    "main": "index.js",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/arnaudSanchez1816/odin-calculator.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "homepage": "https://github.com/arnaudSanchez1816/odin-calculator#readme",
+    "devDependencies": {
+      "case-anything": "^2.1.13",
+      "eslint": "^8.47.0",
+      "eslint-config-airbnb-base": "^15.0.0",
+      "eslint-plugin-import": "^2.28.1",
+      "jest": "^29.6.4",
+      "jest-cli": "^29.6.4"
+    },
+    "engines": {
+      "npm": ">=8.5.5",
+      "node": ">=18.0.0"
+    },
+    "scripts": {
+      "test": "jest"
+    },
+    "eslintConfig": {
+      "root": true
+    }
+  }
+  

@@ -12,6 +12,13 @@ function tokenize(text) {
         currentChar : function() {
             return text.charAt(this.currentCharIndex);
         },
+        nextChar : function() {
+            if(this.currentCharIndex + 1 >= text.length) {
+                return "\0";
+            }
+
+            return text.charAt(this.currentCharIndex + 1);
+        },
         advance : function() {
             this.currentCharIndex +=1;
             if(this.currentCharIndex > text.length) {
@@ -28,7 +35,7 @@ function tokenize(text) {
         const index = lexer.currentCharIndex;
         const char = lexer.currentChar();
 
-        if(isCharNumber(char) || char === "."){
+        if(isCharNumber(char)){
             tokens.push(getNumberToken(lexer));
             continue;
         }
@@ -61,13 +68,25 @@ function tokenize(text) {
     return tokens;
 }
 
+function isCharNumber(c) {
+    return c >= '0' && c <= '9';
+}
+
 function getNumberToken(lexer) {
-    let number = "";
-    while(isCharNumber(lexer.currentChar()) || lexer.currentChar() === ".") {
-        number += lexer.currentChar();
+    const startIndex = lexer.currentCharIndex;
+    while(isCharNumber(lexer.currentChar())){
         lexer.advance();
     }
-    return createToken(TOKEN_TYPES.number, number); 
+
+    if(lexer.currentChar() === "." && isCharNumber(lexer.nextChar())){
+        lexer.advance();
+    }
+    
+    while(isCharNumber(lexer.currentChar())){
+        lexer.advance();
+    }
+
+    return createToken(TOKEN_TYPES.number, lexer.text.substring(startIndex, lexer.currentCharIndex));
 }
 
 function getModuloToken(lexer) {
@@ -119,9 +138,5 @@ const SYMBOLS_TOKENS_LOOKUP = new Map([
     ["(", TOKEN_TYPES.brace_left],
     [")", TOKEN_TYPES.brace_right]
 ]);
-
-function isCharNumber(c) {
-    return c >= '0' && c <= '9';
-}
 
 module.exports = tokenize;

@@ -59,14 +59,34 @@ describe("tokenize", () => {
         ];
         expect(tokenize("modmedmold")).toEqual(tokens);
     });
-    const allNumbersExp = "123456789.987654321 + 0.0000123";
-    test(largeNumberExp, () => {
+    const allNumbersExp = "123456789987654321 + 00000123";
+    test(allNumbersExp, () => {
         const tokens = [
-            {tokenType : "TOKEN_NUMBER", text : "123456789.987654321"},
+            {tokenType : "TOKEN_NUMBER", text : "123456789987654321"},
             {tokenType : "TOKEN_PLUS", text : "+"},
-            {tokenType : "TOKEN_NUMBER", text : "0.0000123"},
+            {tokenType : "TOKEN_NUMBER", text : "00000123"},
             {tokenType : "TOKEN_EOF", text : ""},
         ];
         expect(tokenize(allNumbersExp)).toEqual(tokens);
+    });
+
+    test("Decimal numbers", () => {
+        expect(tokenize("12.56")).toEqual([
+            {tokenType : "TOKEN_NUMBER", text : "12.56"},
+            {tokenType : "TOKEN_EOF", text : ""},
+        ]);
+        expect(tokenize(".5")).toEqual([
+            {tokenType : "TOKEN_UNKNOWN", text : "."},
+            {tokenType : "TOKEN_NUMBER", text : "5"},
+            {tokenType : "TOKEN_EOF", text : ""},
+        ]);
+        expect(tokenize("1...5")).toEqual([
+            {tokenType : "TOKEN_NUMBER", text : "1"},
+            {tokenType : "TOKEN_UNKNOWN", text : "."},
+            {tokenType : "TOKEN_UNKNOWN", text : "."},
+            {tokenType : "TOKEN_UNKNOWN", text : "."},
+            {tokenType : "TOKEN_NUMBER", text : "5"},
+            {tokenType : "TOKEN_EOF", text : ""},
+        ]);
     });
 });

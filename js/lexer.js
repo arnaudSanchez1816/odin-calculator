@@ -24,15 +24,15 @@ function tokenize(text) {
     console.assert(typeof text === "string");
 
     while(lexer.currentCharIndex < lexer.text.length) {
-        const tokenType = TOKEN_TYPES.unknown;
+        let tokenType = TOKEN_TYPES.unknown;
         const char = lexer.currentChar();
 
         if(isCharNumber(char) || char === "."){
             tokens.push(getNumberToken(lexer));
             continue;
         }
-        else if(SYMBOLS_TOKENS_LOOKUP[char]) {
-            tokenType = SYMBOLS_TOKENS_LOOKUP[char];
+        else if(SYMBOLS_TOKENS_LOOKUP.get(char)) {
+            tokenType = SYMBOLS_TOKENS_LOOKUP.get(char);
         }
         else if(char == " ") {
             lexer.advance();
@@ -45,6 +45,7 @@ function tokenize(text) {
         }
         else {
             console.error(`Unknown symbol ${char}`);
+            tokens.push(createToken(tokenType, char));
         }
         lexer.advance();
     }
@@ -65,13 +66,14 @@ function getNumberToken(lexer) {
 const TOKEN_TYPES = {
     unknown : null,
     eof : "TOKEN_EOF",
+    number : "TOKEN_NUMBER",
     plus : "TOKEN_PLUS",
     minus : "TOKEN_MINUS",
     divide : "TOKEN_DIVIDE",
     multiply : "TOKEN_MULTIPLY",
     sqrt : "TOKEN_SQRT",
     exponent : "TOKEN_EXPONENT",
-    mod : "TOKEN_MOD",
+    mod : "TOKEN_MODULO",
     percent : "TOKEN_PERCENT",
     brace_left : "TOKEN_BRACE_LEFT",
     brace_right : "TOKEN_BRACE_RIGHT"

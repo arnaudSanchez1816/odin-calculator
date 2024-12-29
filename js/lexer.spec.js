@@ -59,4 +59,14 @@ describe("tokenize", () => {
         ];
         expect(tokenize("modmedmold")).toEqual(tokens);
     });
+    const allNumbersExp = "123456789.987654321 + 0.0000123";
+    test(largeNumberExp, () => {
+        const tokens = [
+            {tokenType : "TOKEN_NUMBER", text : "123456789.987654321"},
+            {tokenType : "TOKEN_PLUS", text : "+"},
+            {tokenType : "TOKEN_NUMBER", text : "0.0000123"},
+            {tokenType : "TOKEN_EOF", text : ""},
+        ];
+        expect(tokenize(allNumbersExp)).toEqual(tokens);
+    });
 });

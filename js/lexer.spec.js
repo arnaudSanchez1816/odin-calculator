@@ -8,6 +8,6 @@ describe("tokenize", () => {
             {tokenType : "TOKEN_NUMBER", text : "1"},
             {tokenType : "TOKEN_EOF", text : ""}
         ];
-        expect(tokenize("1 + 1").toBe(tokens));
+        expect(tokenize("1 + 1")).toBe(tokens);
     });
 });

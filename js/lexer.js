@@ -10,7 +10,7 @@ function tokenize(text) {
         text,
         currentCharIndex : 0,
         currentChar : function() {
-            return text.chartAt(this.currentCharIndex);
+            return text.charAt(this.currentCharIndex);
         },
         advance : function() {
             this.currentCharIndex +=1;
@@ -55,7 +55,7 @@ function tokenize(text) {
 
 function getNumberToken(lexer) {
     let number = "";
-    while(isCharNumber(lexer.currentChar()) || char === ".") {
+    while(isCharNumber(lexer.currentChar()) || lexer.currentChar() === ".") {
         number += lexer.currentChar();
         lexer.advance();
     }

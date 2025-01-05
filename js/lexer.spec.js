@@ -1,4 +1,4 @@
-const tokenize = require("./lexer");
+const token = require("./lexer");
 
 describe("tokenize", () => {
     const test1Exp = "1 + 1";
@@ -9,7 +9,7 @@ describe("tokenize", () => {
             {tokenType : "TOKEN_NUMBER", text : "1"},
             {tokenType : "TOKEN_EOF", text : ""}
         ];
-        expect(tokenize(test1Exp)).toEqual(tokens);
+        expect(token.tokenize(test1Exp)).toEqual(tokens);
     });
     const test2Exp = "1 + 12.1 \u00D7 (5\u00F7(9-1))";
     test(test2Exp, () => {
@@ -29,7 +29,7 @@ describe("tokenize", () => {
             {tokenType : "TOKEN_BRACE_RIGHT", text : ")"},
             {tokenType : "TOKEN_EOF", text : ""}
         ];
-        expect(tokenize(test2Exp)).toEqual(tokens);
+        expect(token.tokenize(test2Exp)).toEqual(tokens);
     });
     const everySymbolsExp = "+-\u00D7\u00F7\u221A^mod%()";
     test(everySymbolsExp, () => {
@@ -46,7 +46,7 @@ describe("tokenize", () => {
             {tokenType : "TOKEN_BRACE_RIGHT", text : ")"},
             {tokenType : "TOKEN_EOF", text : ""},
         ];
-        expect(tokenize(everySymbolsExp)).toEqual(tokens);
+        expect(token.tokenize(everySymbolsExp)).toEqual(tokens);
     });
     test("Modulo token", () => {
         const tokens = [
@@ -57,7 +57,7 @@ describe("tokenize", () => {
             {tokenType : "TOKEN_UNKNOWN", text : "d"},
             {tokenType : "TOKEN_EOF", text : ""},
         ];
-        expect(tokenize("modmedmold")).toEqual(tokens);
+        expect(token.tokenize("modmedmold")).toEqual(tokens);
     });
     const allNumbersExp = "123456789987654321 + 00000123";
     test(allNumbersExp, () => {
@@ -67,20 +67,20 @@ describe("tokenize", () => {
             {tokenType : "TOKEN_NUMBER", text : "00000123"},
             {tokenType : "TOKEN_EOF", text : ""},
         ];
-        expect(tokenize(allNumbersExp)).toEqual(tokens);
+        expect(token.tokenize(allNumbersExp)).toEqual(tokens);
     });
 
     test("Decimal numbers", () => {
-        expect(tokenize("12.56")).toEqual([
+        expect(token.tokenize("12.56")).toEqual([
             {tokenType : "TOKEN_NUMBER", text : "12.56"},
             {tokenType : "TOKEN_EOF", text : ""},
         ]);
-        expect(tokenize(".5")).toEqual([
+        expect(token.tokenize(".5")).toEqual([
             {tokenType : "TOKEN_UNKNOWN", text : "."},
             {tokenType : "TOKEN_NUMBER", text : "5"},
             {tokenType : "TOKEN_EOF", text : ""},
         ]);
-        expect(tokenize("1...5")).toEqual([
+        expect(token.tokenize("1...5")).toEqual([
             {tokenType : "TOKEN_NUMBER", text : "1"},
             {tokenType : "TOKEN_UNKNOWN", text : "."},
             {tokenType : "TOKEN_UNKNOWN", text : "."},

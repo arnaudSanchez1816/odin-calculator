@@ -1,8 +1,12 @@
 function createToken(tokenType, text) {
-    return {
-        tokenType,
-        text
-    };
+    return new Token(tokenType, text);
+}
+
+class Token {
+    constructor(tokenType, text) {
+        this.tokenType = tokenType;
+        this.text = text;
+    }
 }
 
 function tokenize(text) {
@@ -139,4 +143,8 @@ const SYMBOLS_TOKENS_LOOKUP = new Map([
     [")", TOKEN_TYPES.brace_right]
 ]);
 
-module.exports = tokenize;
+module.exports = {
+    tokenize,
+    Token,
+    TOKEN_TYPES
+};

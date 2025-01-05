@@ -27,4 +27,25 @@ describe("AST", () => {
 
         expect(expr.print()).toBe("(+ (- 123) (group 45.67))")
     });
+    
+    test ("RPN", () => {
+        const expr = new exprs.Binary(
+            new exprs.Grouping(
+                new exprs.Binary(
+                    new exprs.Literal(1),
+                    new token.Token(token.TOKEN_TYPES.plus, "+"),
+                    new exprs.Literal(2)
+                )
+            ),
+            new token.Token(token.TOKEN_TYPES.multiply, "*"),
+            new exprs.Grouping(
+                new exprs.Binary(
+                    new exprs.Literal(4),
+                    new token.Token(token.TOKEN_TYPES.minus, "-"),
+                    new exprs.Literal(3)
+                )
+            )
+        );
+        expect(expr.rpn()).toBe("1 2 + 4 3 - *")
+    });
 });

@@ -6,6 +6,9 @@ class Token {
     constructor(tokenType, text) {
         this.tokenType = tokenType;
         this.text = text;
+        if(+text) {
+            this.literal = +text;
+        }
     }
 }
 

@@ -13,9 +13,16 @@ const tokens = require("./lexer");
 const exprs = require("./expr")
 
 class Parser {
-    constructor(tokens) {
-        this.tokens = tokens;
-        this.current = 0;
+    
+    parse(tokens) {
+        try {
+          this.tokens = tokens;
+          this.current = 0;
+          return this.expression();  
+        }
+        catch (error) {
+            console.error(error);
+        }
     }
 
     expression() {
@@ -91,6 +98,8 @@ class Parser {
             this.consumeExpected(tokens.TOKEN_TYPES.brace_right, "Expect ')' after expression.");
             return new exprs.Grouping(expr);
         }
+
+        throw "Expected expression.";
     }
 
     match(...tokenTypes) {
@@ -114,8 +123,7 @@ class Parser {
 
     consumeExpected(tokenType, error = "") {
         if (this.peek().tokenType !== tokenType) {
-            console.error(`Failed to find expected token ${tokenType}`);
-            return;
+            throw `Failed to find expected token ${tokenType}.`;
         }
         return this.advance();
     }

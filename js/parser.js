@@ -18,7 +18,12 @@ class Parser {
         try {
           this.tokens = tokens;
           this.current = 0;
-          return this.expression();  
+          const result = this.expression();
+          if(this.endReached() === false) {
+            throw "Unexpected symbol !";
+          }
+
+          return result;
         }
         catch (error) {
             console.error(error);

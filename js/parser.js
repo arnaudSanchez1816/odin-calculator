@@ -2,7 +2,7 @@
 // expression     → term ;
 // term           → factor ( ( "-" | "+" ) factor )* ;
 // factor         → pow ( ( "*" | "/" ) pow )* ;
-// pow            → unary ( ( "^" | "mod" ) unary )* ;
+// pow            → unary ( ( "^" | "sqrt" | "mod" ) unary )* ;
 // unary          → ( "-" | "sqrt" ) unary
 //                | primary ;
 // primary        → NUMBER | "+" NUMBER | "(" expression ")" ;
@@ -13,7 +13,7 @@ const tokens = require("./lexer");
 const exprs = require("./expr")
 
 class Parser {
-    
+
     parse(tokens) {
         try {
           this.tokens = tokens;
@@ -104,7 +104,7 @@ class Parser {
 
     match(...tokenTypes) {
         for (const tokenType of tokenTypes) {
-            if (check(tokenType)) {
+            if (this.check(tokenType)) {
                 this.advance();
                 return true;
             }
@@ -149,3 +149,5 @@ class Parser {
         return this.peek().tokenType === tokens.TOKEN_TYPES.eof;
     }
 }
+
+module.exports = Parser;

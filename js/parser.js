@@ -59,9 +59,11 @@ class Parser {
     pow() {
         let expr = this.unary();
 
-        // pow, mod
-        while (this.match(tokens.TOKEN_TYPES.pow, 
-            tokens.TOKEN_TYPES.mod)) {
+        // pow, mod, sqrt
+        while (this.match(tokens.TOKEN_TYPES.exponent, 
+            tokens.TOKEN_TYPES.mod,
+            tokens.TOKEN_TYPES.sqrt
+        )) {
             const operator = this.previous();
             const right = this.unary();
             expr = new exprs.Binary(expr, operator, right);

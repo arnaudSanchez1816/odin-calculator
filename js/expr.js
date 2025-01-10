@@ -1,6 +1,4 @@
 class Expr {
-    accept(visitor){}
-
     /**
      * Print this expression abstract syntax tree representation to a string.
      * @returns {string} The string representation of this expression.
@@ -23,10 +21,6 @@ class Binary extends Expr {
         this.right = rightExpr;
     };
 
-    accept(visitor) {
-        return visitor.visitBinary(this);
-    }
-
     print() {
         return parenthesize(this.operator.text, this.left, this.right);
     }
@@ -41,10 +35,6 @@ class Unary extends Expr {
         super();
         this.operator = operatorToken;
         this.right = rightExpr;
-    }
-
-    accept(visitor) {
-        return visitor.visitUnary(this);
     }
 
     print() {
@@ -62,10 +52,6 @@ class Grouping extends Expr {
         this.expr = expr;
     }
 
-    accept(visitor) {
-        return visitor.visitGrouping(this);
-    }
-
     print() {
         return parenthesize("group", this.expr);
     }
@@ -79,10 +65,6 @@ class Literal extends Expr {
     constructor(value) {
         super();
         this.value = value;
-    }
-
-    accept(visitor) {
-        return visitor.visitLiteral(this);
     }
 
     print() {

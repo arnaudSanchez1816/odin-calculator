@@ -35,8 +35,8 @@ class Parser {
         this.tokens = tokens;
         this.current = 0;
         const result = this.expression();
-        if(this.endReached() === false) {
-        throw "Unexpected symbol !";
+        if (this.endReached() === false) {
+            throw "Unexpected symbol !";
         }
 
         return result;
@@ -77,7 +77,7 @@ class Parser {
         let expr = this.unary();
 
         // pow, mod
-        while (this.match(tokens.TOKEN_TYPES.exponent, 
+        while (this.match(tokens.TOKEN_TYPES.exponent,
             tokens.TOKEN_TYPES.mod
         )) {
             const operator = this.previous();

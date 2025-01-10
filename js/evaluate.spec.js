@@ -1,5 +1,6 @@
 const Parser = require("./parser");
 
+// TODO : fix duplication 
 describe("Expressions evaluations", () => {
     test("1+1 = 2", () => {
         const parser = new Parser();
@@ -154,7 +155,7 @@ describe("Expressions evaluations", () => {
         expect(expression.evaluate()).toBe(2);
     });
 
-    test("#2 = 2", () => {
+    test("#2 = 1.414", () => {
         const parser = new Parser();
         const expression = parser.parseString("#2");
 
@@ -171,38 +172,16 @@ describe("Expressions evaluations", () => {
         expect(evaluateFunc).toThrow("Imaginary numbers unsupported");
     });
 
-    test("10*(1+9) = 2", () => {
-        const parser = new Parser();
-        const expression = parser.parseString("10*(1+9)");
-
-        expect(expression.evaluate()).toBe(100);
-    });
-
-    test("10(1+9) = 2", () => {
-        const parser = new Parser();
-        const expression = parser.parseString("10(1+9)");
-
-        expect(expression.evaluate()).toBe(100);
-    });
-
-    test("1+10*100/10 = 101", () => {
-        const parser = new Parser();
-        const expression = parser.parseString("1+10*100/10");
-
-        expect(expression.evaluate()).toBe(101);
-    });
-
-    test("2#4 = 4", () => {
-        const parser = new Parser();
-        const expression = parser.parseString("2#4");
-
-        expect(expression.evaluate()).toBe(4);
-    });
-
-    test("(1+4)(10-5) = 25", () => {
-        const parser = new Parser();
-        const expression = parser.parseString("(1+4)(10-5)");
-
-        expect(expression.evaluate()).toBe(25);
-    });
+    test("10*(1+9) = 100", () => evaluateInput("10*(1+9)", 100));
+    test("10(1+9) = 100", () => evaluateInput("10(1+9)", 100));
+    test("1+10*100/10 = 101", () => evaluateInput("1+10*100/10", 101));
+    test("2#4 = 4", () => evaluateInput("2#4", 4));
+    test("(1+4)(10-5) = 25", () => evaluateInput("(1+4)(10-5)", 25));
 });
+
+function evaluateInput(input, expectedValue) {
+    const parser = new Parser();
+    const expression = parser.parseString(input);
+
+    expect(expression.evaluate()).toBe(expectedValue);
+}

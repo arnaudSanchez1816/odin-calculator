@@ -173,6 +173,10 @@ const TOKEN_TYPES = {
     sqrt: {
         name: "TOKEN_SQRT",
         unary: function (value) {
+            if(value < 0) {
+                throw new "Imaginary numbers unsupported";
+            }
+
             return Math.sqrt(value);
         }
     },
@@ -185,6 +189,10 @@ const TOKEN_TYPES = {
     mod: {
         name: "TOKEN_MODULO",
         binary: function (left, right) {
+            if(right === 0) {
+                throw "Division by zero is undefined";
+            }
+
             return left % right;
         }
     },

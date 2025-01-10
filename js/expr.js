@@ -1,8 +1,17 @@
 class Expr {
     accept(visitor){}
 
+    /**
+     * Print this expression abstract syntax tree representation to a string.
+     * @returns {string} The string representation of this expression.
+     */
     print(){}
 
+    /**
+     * Evaluate the expression.
+     * @returns {number} A number corresponding to the evaluated expression.
+     * @throws {String} If an operation was not supported, reason being the exception message.
+     */
     evaluate(){}
 }
 

@@ -1,3 +1,9 @@
+/**
+ * Create a token of the given type.
+ * @param {TokenType} tokenType - the token type of the token
+ * @param {string} text - text of the token
+ * @returns {Token}
+ */
 function createToken(tokenType, text) {
     return new Token(tokenType, text);
 }

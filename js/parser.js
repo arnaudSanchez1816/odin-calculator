@@ -14,25 +14,32 @@ const exprs = require("./expr")
 
 class Parser {
 
+    /**
+     * Parse the given string to an expression.
+     * @param {string} inputString 
+     * @returns {Expr} The expression parsed from the input string.
+     * @throws {string} When a valid expression cannot be formed.
+     */
     parseString(inputString) {
         const inputTokens = tokens.tokenize(inputString);
         return this.parseTokens(inputTokens)
     }
 
+    /**
+     * Parse the given array of tokens into an expression.
+     * @param {Token[]} tokens - Array of tokens to parse.
+     * @returns {Expr} The expression parsed from the tokens array.
+     * @throws {string} When a valid expression cannot be formed.
+     */
     parseTokens(tokens) {
-        try {
-          this.tokens = tokens;
-          this.current = 0;
-          const result = this.expression();
-          if(this.endReached() === false) {
-            throw "Unexpected symbol !";
-          }
+        this.tokens = tokens;
+        this.current = 0;
+        const result = this.expression();
+        if(this.endReached() === false) {
+        throw "Unexpected symbol !";
+        }
 
-          return result;
-        }
-        catch (error) {
-            console.error(error);
-        }
+        return result;
     }
 
     expression() {

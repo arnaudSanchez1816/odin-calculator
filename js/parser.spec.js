@@ -47,6 +47,15 @@ describe("Parser", () => {
         expect(expr.print()).toBe("(* 1 (# (group (- 5 2))))");
     });
 
+    test("50mod0", () => {
+        const input = "50mod0";
+        const tokens = token.tokenize(input);
+
+        const parser = new Parser();
+        const expr = parser.parseTokens(tokens);
+        expect(expr.print()).toBe("(mod 50 0)");
+    });
+
     test("Chained square roots", () => {
         const input = "#2";
         const tokens = token.tokenize(input);

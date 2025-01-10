@@ -35,7 +35,7 @@ describe("Parser", () => {
 
         const parser = new Parser();
         const expr = parser.parse(tokens);
-        expect(expr.print()).toBe("(# 1 (group (- 5 2)))");
+        expect(expr.print()).toBe("(* 1 (# (group (- 5 2))))");
     });
 
     test("Chained square roots", () => {
@@ -50,7 +50,7 @@ describe("Parser", () => {
         expect(parser.parse(tokens2).print()).toBe("(# (# (# (# 10))))");
 
         const tokens3 = token.tokenize("1##10##5");
-        expect(parser.parse(tokens3).print()).toBe("(# (# 1 (# 10)) (# 5))");
+        expect(parser.parse(tokens3).print()).toBe("(* (* 1 (# (# 10))) (# (# 5)))");
     });
 
     test("Every operators", () => {
@@ -74,8 +74,8 @@ describe("Parser", () => {
         const mod = token.tokenize("1mod1");
         expect(parser.parse(mod).print()).toBe("(mod 1 1)");
 
-        const sqrt = token.tokenize("1#1");
-        expect(parser.parse(sqrt).print()).toBe("(# 1 1)");
+        const sqrt = token.tokenize("#1");
+        expect(parser.parse(sqrt).print()).toBe("(# 1)");
     });
 
     test("Literals", () => {
@@ -134,5 +134,18 @@ describe("Parser", () => {
 
         const priority = token.tokenize("1+2*3^4");
         expect(parser.parse(priority).print()).toBe("(+ 1 (* 2 (^ 3 4)))");
+    });
+
+    test("Implicit multiplication", () => {
+        const parser = new Parser();
+
+        const tokens = token.tokenize("2(5)");
+        expect(parser.parse(tokens).print()).toBe("(* 2 (group 5))");
+
+        const tokensSqrt = token.tokenize("50.5#10.1");
+        expect(parser.parse(tokensSqrt).print()).toBe("(* 50.5 (# 10.1))");
+
+        const tokensSqrt2 = token.tokenize("1#(#63636)");
+        expect(parser.parse(tokensSqrt2).print()).toBe("(* 1 (# (group (# 63636))))");
     });
 });

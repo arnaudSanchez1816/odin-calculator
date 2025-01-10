@@ -2,7 +2,7 @@
 // expression     → term ;
 // term           → factor ( ( "-" | "+" ) factor )* ;
 // factor         → pow ( ( "*" | "/" ) pow )* ;
-// pow            → unary ( ( "^" | "sqrt" | "mod" ) unary )* ;
+// pow            → unary ( ( "^" | "mod" ) unary )* ;
 // unary          → ( "-" | "sqrt" ) unary
 //                | primary ;
 // primary        → NUMBER | "+" NUMBER | "(" expression ")" ;
@@ -64,10 +64,9 @@ class Parser {
     pow() {
         let expr = this.unary();
 
-        // pow, mod, sqrt
+        // pow, mod
         while (this.match(tokens.TOKEN_TYPES.exponent, 
-            tokens.TOKEN_TYPES.mod,
-            tokens.TOKEN_TYPES.sqrt
+            tokens.TOKEN_TYPES.mod
         )) {
             const operator = this.previous();
             const right = this.unary();

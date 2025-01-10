@@ -6,7 +6,7 @@ class Token {
     constructor(tokenType, text) {
         this.tokenType = tokenType;
         this.text = text;
-        if(+text) {
+        if (+text) {
             this.literal = +text;
         }
     }
@@ -15,20 +15,20 @@ class Token {
 function tokenize(text) {
     const lexer = {
         text,
-        currentCharIndex : 0,
-        currentChar : function() {
+        currentCharIndex: 0,
+        currentChar: function () {
             return text.charAt(this.currentCharIndex);
         },
-        nextChar : function() {
-            if(this.currentCharIndex + 1 >= text.length) {
+        nextChar: function () {
+            if (this.currentCharIndex + 1 >= text.length) {
                 return "\0";
             }
 
             return text.charAt(this.currentCharIndex + 1);
         },
-        advance : function() {
-            this.currentCharIndex +=1;
-            if(this.currentCharIndex > text.length) {
+        advance: function () {
+            this.currentCharIndex += 1;
+            if (this.currentCharIndex > text.length) {
                 this.currentCharIndex = text.length;
             }
         }
@@ -37,30 +37,42 @@ function tokenize(text) {
     const tokens = [];
     console.assert(typeof text === "string");
 
-    while(lexer.currentCharIndex < lexer.text.length) {
+    while (lexer.currentCharIndex < lexer.text.length) {
         let tokenType = TOKEN_TYPES.unknown;
         const index = lexer.currentCharIndex;
         const char = lexer.currentChar();
+        const lastToken = tokens.slice(-1)[0];
+        let tryInsertImplicitMultiply = false;
+        if (lastToken) {
+            tryInsertImplicitMultiply = lastToken.tokenType === TOKEN_TYPES.number
+                || lastToken.tokenType === TOKEN_TYPES.brace_right;
+        }
 
-        if(isCharNumber(char)){
+        if (isCharNumber(char)) {
             tokens.push(getNumberToken(lexer));
             continue;
         }
-        else if(SYMBOLS_TOKENS_LOOKUP.get(char)) {
+        else if (SYMBOLS_TOKENS_LOOKUP.get(char)) {
             tokenType = SYMBOLS_TOKENS_LOOKUP.get(char);
+
+            if (tryInsertImplicitMultiply &&
+                (tokenType === TOKEN_TYPES.brace_left || tokenType === TOKEN_TYPES.sqrt)) {
+                // Insert an implicit multiply token
+                tokens.push(createToken(TOKEN_TYPES.multiply, "*"));
+            }
         }
         // Modulo special case
         // TODO : Find a better way to handle multiple chars symbols
-        else if(char === "m") {
+        else if (char === "m") {
             tokens.push(getModuloToken(lexer));
             continue;
         }
-        else if(char === " ") {
+        else if (char === " ") {
             lexer.advance();
             continue;
         }
 
-        if(tokenType !== TOKEN_TYPES.unknown) {
+        if (tokenType !== TOKEN_TYPES.unknown) {
             // We found a valid token
             tokens.push(createToken(tokenType, char));
         }
@@ -81,15 +93,15 @@ function isCharNumber(c) {
 
 function getNumberToken(lexer) {
     const startIndex = lexer.currentCharIndex;
-    while(isCharNumber(lexer.currentChar())){
+    while (isCharNumber(lexer.currentChar())) {
         lexer.advance();
     }
 
-    if(lexer.currentChar() === "." && isCharNumber(lexer.nextChar())){
+    if (lexer.currentChar() === "." && isCharNumber(lexer.nextChar())) {
         lexer.advance();
     }
-    
-    while(isCharNumber(lexer.currentChar())){
+
+    while (isCharNumber(lexer.currentChar())) {
         lexer.advance();
     }
 
@@ -99,7 +111,7 @@ function getNumberToken(lexer) {
 function getModuloToken(lexer) {
     const MOD_SYMBOL = "mod";
     let tokenText = "";
-    if(lexer.currentCharIndex + 2 >= lexer.text.length) {
+    if (lexer.currentCharIndex + 2 >= lexer.text.length) {
         // There is not enough characters left to make a modulo token
         return;
     }
@@ -107,9 +119,9 @@ function getModuloToken(lexer) {
     do {
         tokenText += lexer.currentChar();
         lexer.advance();
-    } while(MOD_SYMBOL.startsWith(tokenText) && tokenText.length < MOD_SYMBOL.length);
+    } while (MOD_SYMBOL.startsWith(tokenText) && tokenText.length < MOD_SYMBOL.length);
 
-    if(tokenText === MOD_SYMBOL) {
+    if (tokenText === MOD_SYMBOL) {
         return createToken(TOKEN_TYPES.mod, tokenText);
     }
 
@@ -118,19 +130,67 @@ function getModuloToken(lexer) {
 }
 
 const TOKEN_TYPES = {
-    unknown : "TOKEN_UNKNOWN",
-    eof : "TOKEN_EOF",
-    number : "TOKEN_NUMBER",
-    plus : "TOKEN_PLUS",
-    minus : "TOKEN_MINUS",
-    divide : "TOKEN_DIVIDE",
-    multiply : "TOKEN_MULTIPLY",
-    sqrt : "TOKEN_SQRT",
-    exponent : "TOKEN_EXPONENT",
-    mod : "TOKEN_MODULO",
-    percent : "TOKEN_PERCENT",
-    brace_left : "TOKEN_BRACE_LEFT",
-    brace_right : "TOKEN_BRACE_RIGHT"
+    unknown: {
+        name: "TOKEN_UNKNOWN"
+    },
+    eof: {
+        name: "TOKEN_EOF"
+    },
+    number: {
+        name:
+            "TOKEN_NUMBER"
+    },
+    plus: {
+        name: "TOKEN_PLUS",
+        binary: function (left, right) {
+            return left + right;
+        }
+    },
+    minus: {
+        name: "TOKEN_MINUS",
+        binary: function (left, right) {
+            return left - right;
+        },
+        unary: function (value) {
+            return -value;
+        }
+    },
+    divide: {
+        name: "TOKEN_DIVIDE",
+        binary: function (left, right) {
+            return left / right;
+        }
+    },
+    multiply: {
+        name: "TOKEN_MULTIPLY",
+        binary: function (left, right) {
+            return left * right;
+        }
+    },
+    sqrt: {
+        name: "TOKEN_SQRT",
+        unary: function (value) {
+            return Math.sqrt(value);
+        }
+    },
+    exponent: {
+        name: "TOKEN_EXPONENT",
+        binary: function (left, right) {
+            return left ** right;
+        }
+    },
+    mod: {
+        name: "TOKEN_MODULO",
+        binary: function (left, right) {
+            return left % right;
+        }
+    },
+    brace_left: {
+        name: "TOKEN_BRACE_LEFT"
+    },
+    brace_right: {
+        name: "TOKEN_BRACE_RIGHT"
+    }
 };
 
 const SYMBOLS_TOKENS_LOOKUP = new Map([
@@ -144,7 +204,6 @@ const SYMBOLS_TOKENS_LOOKUP = new Map([
     ["#", TOKEN_TYPES.sqrt],
     ["^", TOKEN_TYPES.exponent],
     ["mod", TOKEN_TYPES.mod],
-    ["%", TOKEN_TYPES.percent],
     ["(", TOKEN_TYPES.brace_left],
     [")", TOKEN_TYPES.brace_right]
 ]);

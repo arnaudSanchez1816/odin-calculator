@@ -1,6 +1,16 @@
 const token = require("./lexer");
 
 describe("tokenize", () => {
+    const test0Exp = "0 + 0";
+    test(test0Exp, () => {
+        const tokens = [
+            new token.Token(token.TOKEN_TYPES.number, "0"),
+            new token.Token(token.TOKEN_TYPES.plus, "+"),
+            new token.Token(token.TOKEN_TYPES.number, "0"),
+            new token.Token(token.TOKEN_TYPES.eof, ""),
+        ];
+        expect(token.tokenize(test0Exp)).toEqual(tokens);
+    });
     const test1Exp = "1 + 1";
     test(test1Exp, () => {
         const tokens = [

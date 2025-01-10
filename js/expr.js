@@ -2,6 +2,8 @@ class Expr {
     accept(visitor){}
 
     print(){}
+
+    evaluate(){}
 }
 
 class Binary extends Expr {
@@ -19,6 +21,10 @@ class Binary extends Expr {
     print() {
         return parenthesize(this.operator.text, this.left, this.right);
     }
+
+    evaluate() {
+        return this.operator.binary(this.left.evaluate(), this.right.evaluate());
+    }
 }
 
 class Unary extends Expr {
@@ -35,6 +41,10 @@ class Unary extends Expr {
     print() {
         return parenthesize(this.operator.text, this.right);
     }
+
+    evaluate() {
+        return this.operator.unary(this.right.evaluate());
+    }
 }
 
 class Grouping extends Expr {
@@ -50,6 +60,10 @@ class Grouping extends Expr {
     print() {
         return parenthesize("group", this.expr);
     }
+
+    evaluate() {
+        return this.expr.evaluate();
+    }
 }
 
 class Literal extends Expr {
@@ -63,9 +77,12 @@ class Literal extends Expr {
     }
 
     print() {
-        return this.value.toString();
+        return this.value.text;
     }
 
+    evaluate() {
+        return +this.value.text;
+    }
 }
 
 function parenthesize(name, ...exprs) {

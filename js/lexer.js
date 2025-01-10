@@ -6,9 +6,8 @@ class Token {
     constructor(tokenType, text) {
         this.tokenType = tokenType;
         this.text = text;
-        if (+text) {
-            this.literal = +text;
-        }
+        this.binary = tokenType.binary;
+        this.unary = tokenType.unary;
     }
 }
 
@@ -158,6 +157,10 @@ const TOKEN_TYPES = {
     divide: {
         name: "TOKEN_DIVIDE",
         binary: function (left, right) {
+            if(right === 0) {
+                throw "Division by zero is undefined";
+            }
+
             return left / right;
         }
     },

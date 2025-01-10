@@ -14,7 +14,12 @@ const exprs = require("./expr")
 
 class Parser {
 
-    parse(tokens) {
+    parseString(inputString) {
+        const inputTokens = tokens.tokenize(inputString);
+        return this.parseTokens(inputTokens)
+    }
+
+    parseTokens(tokens) {
         try {
           this.tokens = tokens;
           this.current = 0;
@@ -89,13 +94,13 @@ class Parser {
     primary() {
         // NUMBER
         if (this.match(tokens.TOKEN_TYPES.number)) {
-            return new exprs.Literal(this.previous().literal);
+            return new exprs.Literal(this.previous());
         }
 
         // "+" NUMBER
         if (this.match(tokens.TOKEN_TYPES.plus)) {
             this.consumeExpected(tokens.TOKEN_TYPES.number, "Expect number after plus symbol.");
-            return new exprs.Literal(this.previous().literal);
+            return new exprs.Literal(this.previous());
         }
 
         // "(" expression ")"

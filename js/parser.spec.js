@@ -106,7 +106,8 @@ describe("Parser", () => {
         expect(parser.parseTokens(literal2).print()).toBe("1");
 
         const literal3 = token.tokenize("+++1");
-        expect(parser.parseTokens(literal3)).toBe(undefined);
+        const func = function() { parser.parseTokens(literal3)};
+        expect(func).toThrow();
     });
 
     test("Groupings", () => {
@@ -119,13 +120,16 @@ describe("Parser", () => {
         expect(parser.parseTokens(grouping2).print()).toBe("(group (group (group 5)))");
 
         const grouping3 = token.tokenize("(5");
-        expect(parser.parseTokens(grouping3)).toBe(undefined);
+        const funcGrouping3 = function() { parser.parseTokens(grouping3)};
+        expect(funcGrouping3).toThrow();
 
         const grouping4 = token.tokenize("5)");
-        expect(parser.parseTokens(grouping4)).toBe(undefined);
+        const funcGrouping4 = function() { parser.parseTokens(grouping4)};
+        expect(funcGrouping4).toThrow();
 
         const grouping5 = token.tokenize("((5)");
-        expect(parser.parseTokens(grouping5)).toBe(undefined);
+        const funcGrouping5 = function() { parser.parseTokens(grouping5)};
+        expect(funcGrouping5).toThrow();
     });
 
     test("Unary", () => {

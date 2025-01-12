@@ -4,7 +4,8 @@
 // factor         → pow ( ( "*" | "/" ) pow )* ;
 // pow            → unary ( ( "^" | "mod" ) unary )* ;
 // unary          → ( "-" | "sqrt" ) unary
-//                | primary ;
+//                | postfix ;
+// postfix        → primary ( "%" )* ;
 // primary        → NUMBER | "+" NUMBER | "(" expression ")" ;
 
 // https://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/
@@ -99,7 +100,17 @@ class Parser {
             return new exprs.Unary(this.previous(), this.unary());
         }
 
-        return this.primary();
+        return this.postfix();
+    }
+
+    postfix() {
+        // %
+        let expr = this.primary();
+        while(this.match(tokens.TOKEN_TYPES.percent)) {
+            expr = new exprs.Postfix(this.previous(), expr);
+        }
+
+        return expr;
     }
 
     primary() {
@@ -145,7 +156,7 @@ class Parser {
 
     consumeExpected(tokenType, error = "") {
         if (this.peek().tokenType !== tokenType) {
-            throw `Failed to find expected token ${tokenType}.`;
+            throw `Failed to find expected token ${tokenType.name}.`;
         }
         return this.advance();
     }

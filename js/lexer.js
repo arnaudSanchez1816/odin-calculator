@@ -14,6 +14,7 @@ class Token {
         this.text = text;
         this.binary = tokenType.binary;
         this.unary = tokenType.unary;
+        this.postfix = tokenType.postfix;
     }
 }
 
@@ -202,6 +203,12 @@ const TOKEN_TYPES = {
             return left % right;
         }
     },
+    percent: {
+        name: "TOKEN_PERCENT",
+        postfix: function(left) {
+            return left / 100;
+        }
+    },
     brace_left: {
         name: "TOKEN_BRACE_LEFT"
     },
@@ -221,6 +228,7 @@ const SYMBOLS_TOKENS_LOOKUP = new Map([
     ["#", TOKEN_TYPES.sqrt],
     ["^", TOKEN_TYPES.exponent],
     ["mod", TOKEN_TYPES.mod],
+    ["%", TOKEN_TYPES.percent],
     ["(", TOKEN_TYPES.brace_left],
     [")", TOKEN_TYPES.brace_right]
 ]);

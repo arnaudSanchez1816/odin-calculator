@@ -170,4 +170,14 @@ describe("Parser", () => {
         const tokensSqrt2 = token.tokenize("1#(#63636)");
         expect(parser.parseTokens(tokensSqrt2).print()).toBe("(* 1 (# (group (# 63636))))");
     });
+
+    test("Postfix", () => {
+        const parser = new Parser();
+
+        const tokens = token.tokenize("5%");
+        expect(parser.parseTokens(tokens).print()).toBe("(5 %)");
+
+        const tokens2 = token.tokenize("-5%");
+        expect(parser.parseTokens(tokens2).print()).toBe("(- (5 %))");
+    });
 });

@@ -46,6 +46,22 @@ class Unary extends Expr {
     }
 }
 
+class Postfix extends Expr {
+    constructor(operatorToken, leftExpr) {
+        super();
+        this.operator = operatorToken;
+        this.left = leftExpr;
+    }
+
+    print() {
+        return `(${this.left.print()} ${this.operator.text})`;
+    }
+
+    evaluate() {
+        return this.operator.postfix(this.left.evaluate());
+    }
+}
+
 class Grouping extends Expr {
     constructor(expr) {
         super();
@@ -88,5 +104,6 @@ module.exports = {
     Literal,
     Grouping,
     Unary,
-    Binary
+    Binary,
+    Postfix
 }

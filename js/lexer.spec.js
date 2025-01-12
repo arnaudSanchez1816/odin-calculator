@@ -112,7 +112,7 @@ describe("tokenize", () => {
     });
 
     test("Every tokens", () => {
-        expect(token.tokenize("1+-\u00D7*\u00F7/^\u221A#mod()")).toEqual([
+        expect(token.tokenize("1+-\u00D7*\u00F7/^\u221A#mod%()")).toEqual([
             new token.Token(token.TOKEN_TYPES.number, "1"),
             new token.Token(token.TOKEN_TYPES.plus, "+"),
             new token.Token(token.TOKEN_TYPES.minus, "-"),
@@ -124,6 +124,7 @@ describe("tokenize", () => {
             new token.Token(token.TOKEN_TYPES.sqrt, "\u221A"),
             new token.Token(token.TOKEN_TYPES.sqrt, "#"),
             new token.Token(token.TOKEN_TYPES.mod, "mod"),
+            new token.Token(token.TOKEN_TYPES.percent, "%"),
             new token.Token(token.TOKEN_TYPES.brace_left, "("),
             new token.Token(token.TOKEN_TYPES.brace_right, ")"),
             new token.Token(token.TOKEN_TYPES.eof, "")

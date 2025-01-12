@@ -177,6 +177,11 @@ describe("Expressions evaluations", () => {
     test("1+10*100/10 = 101", () => evaluateInput("1+10*100/10", 101));
     test("2#4 = 4", () => evaluateInput("2#4", 4));
     test("(1+4)(10-5) = 25", () => evaluateInput("(1+4)(10-5)", 25));
+
+    // Percent
+    test("1500 * 12% = 180", () => evaluateInput("1500*12%", 180));
+    test("660 / 880% = 75", () => evaluateInput("660/880%", 75));
+    test("300 + 500% = 305", () => evaluateInput("300+500%", 305));
 });
 
 function evaluateInput(input, expectedValue) {

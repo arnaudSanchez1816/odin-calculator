@@ -16,6 +16,10 @@
 
 import tokens from "./lexer.js";
 import exprs from "./expr.js";
+/*
+const tokens = require("./lexer");
+const exprs = require("./expr");
+*/
 
 class Parser {
 
@@ -186,3 +190,5 @@ class Parser {
 export default {
     Parser
 }
+
+//module.exports = Parser;

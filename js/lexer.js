@@ -238,3 +238,10 @@ export default {
     Token,
     TOKEN_TYPES
 };
+/*
+module.exports = {
+    tokenize,
+    Token,
+    TOKEN_TYPES
+};
+*/

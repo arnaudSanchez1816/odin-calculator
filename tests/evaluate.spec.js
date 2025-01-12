@@ -1,4 +1,4 @@
-const Parser = require("./parser");
+const Parser = require("../js/parser");
 
 // TODO : fix duplication 
 describe("Expressions evaluations", () => {

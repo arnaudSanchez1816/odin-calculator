@@ -1,5 +1,5 @@
-const exprs = require("./expr");
-const token = require("./lexer");
+const exprs = require("../js/expr");
+const token = require("../js/lexer");
 
 describe("AST", () => {
     test("AST print function", () => {

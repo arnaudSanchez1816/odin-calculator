@@ -1,5 +1,5 @@
-const Parser = require("./parser");
-const token = require("./lexer");
+const Parser = require("../js/parser");
+const token = require("../js/lexer");
 
 describe("Parser", () => {
     test("1+1", () => {

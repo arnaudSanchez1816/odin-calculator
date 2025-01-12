@@ -1,4 +1,4 @@
-const token = require("../js/lexer");
+const token = require("../js/lexer").default;
 
 describe("tokenize", () => {
     const test0Exp = "0 + 0";

@@ -14,8 +14,8 @@
 
 // https://craftinginterpreters.com/parsing-expressions.html#syntax-errors
 
-const tokens = require("./lexer");
-const exprs = require("./expr")
+import tokens from "./lexer.js";
+import exprs from "./expr.js";
 
 class Parser {
 
@@ -183,4 +183,6 @@ class Parser {
     }
 }
 
-module.exports = Parser;
+export default {
+    Parser
+}

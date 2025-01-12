@@ -10,81 +10,80 @@
 <body>
     <div class="content">
         <div class="calculator">
-            <div class="input">
-                <span>0</span>
-            </div>
+            <div id="inputField" class="input">0</div>
             <div class="controls grid">
                 <div class="numpad col-4 grid">
                     <div class="col-2 pl-0">
-                        <button class="operator bold">C</button>
+                        <button class="operator bold" data-key="Delete" >C</button>
                     </div>
                     <div class="col-2">
-                        <button class="operator">(</button>
+                        <button class="operator" data-key="(">(</button>
                     </div>
                     <div class="col-2">
-                        <button class="operator">)</button>
+                        <button class="operator" data-key=")">)</button>
                     </div>
                     <div class="col-2 pl-0">
-                        <button class="operand">7</button>
+                        <button class="operand" data-key="7">7</button>
                     </div>
                     <div class="col-2">
-                        <button class="operand">8</button>
+                        <button class="operand" data-key="8">8</button>
                     </div>
                     <div class="col-2">
-                        <button class="operand">9</button>
+                        <button class="operand" data-key="9">9</button>
                     </div>
                     <div class="col-2 pl-0">
-                        <button class="operand">4</button>
+                        <button class="operand" data-key="4">4</button>
                     </div>
                     <div class="col-2">
-                        <button class="operand">5</button>
+                        <button class="operand" data-key="5">5</button>
                     </div>
                     <div class="col-2">
-                        <button class="operand">6</button>
+                        <button class="operand" data-key="6">6</button>
                     </div>
                     <div class="col-2 pl-0">
-                        <button class="operand">1</button>
+                        <button class="operand" data-key="1">1</button>
                     </div>
                     <div class="col-2">
-                        <button class="operand">2</button>
+                        <button class="operand" data-key="2">2</button>
                     </div>
                     <div class="col-2">
-                        <button class="operand">3</button>
+                        <button class="operand" data-key="3">3</button>
                     </div>
                     <div class="col-4 pl-0">
-                        <button class="operand">0</button>
+                        <button class="operand" data-key="0">0</button>
                     </div>
                     <div class="col-2">
-                        <button class="operand">.</button>
+                        <button class="operand" data-key=".">.</button>
                     </div>
                 </div>
                 <div class="operators col-2 grid">
                     <div class="col-3">
-                        <button class="operator">%</button>
+                        <button class="operator" data-key="%">%</button>
                     </div>
                     <div class="col-3 pr-0">
-                        <button class="operator">mod</button>
+                        <button class="operator" data-key="m">mod</button>
                     </div>
                     <div class="col-3">
-                        <button class="operator">^</button>
+                        <!-- Could not figure out how to handle "Dead" key ^, use "e" instead -->
+                        <button class="operator" data-key="e">^</button>
                     </div>
                     <div class="col-3 pr-0">
-                        <button class="operator">&#8730;</button>
+                        <button class="operator" data-key="r">&#8730;</button>
                     </div>
                     <div class="col-3">
-                        <button class="operator">&times;</button>
+                        <button class="operator" data-key="*">&times;</button>
                     </div>
                     <div class="col-3 pr-0">
-                        <button class="operator">&div;</button>
+                        <button class="operator" data-key="/">&div;</button>
                     </div>
                     <div class="col-3">
-                        <button class="operator">&plus;</button>
+                        <button class="operator" data-key="+">&plus;</button>
                     </div>
                     <div class="col-3 pr-0">
-                        <button class="operator">&minus;</button>
+                        <button class="operator" data-key="-">&minus;</button>
                     </div>
                     <div class="col pr-0">
-                        <button class="operator">=</button>
+                        <button class="operator" data-key="Enter">=</button>
                     </div>
                 </div>
             </div>
@@ -94,6 +93,6 @@
         2024 - 
         <a href="https://github.com/arnaudSanchez1816/odin-calculator"><i class="fa fa-github" style="font-size:36px"></i></a>
     </footer>
-    <script src="js/script.js"></script>
+    <script type="module" src="js/script.js"></script>
 </body>
 </html>

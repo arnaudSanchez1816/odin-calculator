@@ -63,13 +63,10 @@ footer {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    > span {
-        font-size: 3em;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        direction: rtl;
-    }
+    font-size: 3em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .controls {

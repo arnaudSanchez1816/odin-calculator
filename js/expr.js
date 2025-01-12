@@ -100,7 +100,7 @@ function parenthesize(name, ...exprs) {
     return str;
 }
 
-module.exports = {
+export default {
     Literal,
     Grouping,
     Unary,

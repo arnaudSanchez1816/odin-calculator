@@ -233,7 +233,7 @@ const SYMBOLS_TOKENS_LOOKUP = new Map([
     [")", TOKEN_TYPES.brace_right]
 ]);
 
-module.exports = {
+export default {
     tokenize,
     Token,
     TOKEN_TYPES

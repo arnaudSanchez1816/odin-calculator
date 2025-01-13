@@ -228,7 +228,9 @@ const TOKEN_TYPES = {
 
 const SYMBOLS_TOKENS_LOOKUP = new Map([
     ["+", TOKEN_TYPES.plus],
+    ["\u002B", TOKEN_TYPES.plus],
     ["-", TOKEN_TYPES.minus],
+    ["\u2212", TOKEN_TYPES.minus],
     ["\u00F7", TOKEN_TYPES.divide],
     ["/", TOKEN_TYPES.divide],
     ["\u00D7", TOKEN_TYPES.multiply],

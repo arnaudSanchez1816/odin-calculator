@@ -69,15 +69,15 @@ describe("tokenize", () => {
             new token.Token(token.TOKEN_TYPES.eof, ""),
         ]);
         expect(token.tokenize(".5")).toEqual([
-            new token.Token(token.TOKEN_TYPES.unknown, "."),
+            new token.Token(token.TOKEN_TYPES.separator, "."),
             new token.Token(token.TOKEN_TYPES.number, "5"),
             new token.Token(token.TOKEN_TYPES.eof, ""),
         ]);
         expect(token.tokenize("1...5")).toEqual([
             new token.Token(token.TOKEN_TYPES.number, "1"),
-            new token.Token(token.TOKEN_TYPES.unknown, "."),
-            new token.Token(token.TOKEN_TYPES.unknown, "."),
-            new token.Token(token.TOKEN_TYPES.unknown, "."),
+            new token.Token(token.TOKEN_TYPES.separator, "."),
+            new token.Token(token.TOKEN_TYPES.separator, "."),
+            new token.Token(token.TOKEN_TYPES.separator, "."),
             new token.Token(token.TOKEN_TYPES.number, "5"),
             new token.Token(token.TOKEN_TYPES.eof, ""),
         ]);
@@ -134,7 +134,7 @@ describe("tokenize", () => {
     test("123.", () => {
         const tokens = [
             new token.Token(token.TOKEN_TYPES.number, "123"),
-            new token.Token(token.TOKEN_TYPES.unknown, "."),
+            new token.Token(token.TOKEN_TYPES.separator, "."),
             new token.Token(token.TOKEN_TYPES.eof, ""),
         ];
         expect(token.tokenize("123.")).toEqual(tokens);

@@ -130,4 +130,13 @@ describe("tokenize", () => {
             new token.Token(token.TOKEN_TYPES.eof, "")
         ]);
     });
+
+    test("123.", () => {
+        const tokens = [
+            new token.Token(token.TOKEN_TYPES.number, "123"),
+            new token.Token(token.TOKEN_TYPES.unknown, "."),
+            new token.Token(token.TOKEN_TYPES.eof, ""),
+        ];
+        expect(token.tokenize("123.")).toEqual(tokens);
+    });
 });

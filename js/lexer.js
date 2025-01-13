@@ -18,7 +18,7 @@ class Token {
     }
 }
 
-function tokenize(text) {
+function tokenize(text, addImplicitMultiply = true) {
     const lexer = {
         text,
         currentCharIndex: 0,
@@ -48,8 +48,10 @@ function tokenize(text) {
         const index = lexer.currentCharIndex;
         const char = lexer.currentChar();
         const lastToken = tokens.slice(-1)[0];
+        
+        // Try add an implicit multiply operator if possible
         let tryInsertImplicitMultiply = false;
-        if (lastToken) {
+        if (lastToken && addImplicitMultiply) {
             tryInsertImplicitMultiply = lastToken.tokenType === TOKEN_TYPES.number
                 || lastToken.tokenType === TOKEN_TYPES.brace_right;
         }
@@ -214,6 +216,9 @@ const TOKEN_TYPES = {
     },
     brace_right: {
         name: "TOKEN_BRACE_RIGHT"
+    },
+    separator: {
+        name: "TOKEN_SEPARATOR"
     }
 };
 
@@ -230,7 +235,8 @@ const SYMBOLS_TOKENS_LOOKUP = new Map([
     ["mod", TOKEN_TYPES.mod],
     ["%", TOKEN_TYPES.percent],
     ["(", TOKEN_TYPES.brace_left],
-    [")", TOKEN_TYPES.brace_right]
+    [")", TOKEN_TYPES.brace_right],
+    [".", TOKEN_TYPES.separator]
 ]);
 
 export default {

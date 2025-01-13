@@ -14,13 +14,13 @@
             <div class="controls grid">
                 <div class="numpad col-4 grid">
                     <div class="col-2 pl-0">
-                        <button class="operator bold" data-key="Delete" >C</button>
+                        <button class="clear bold" data-key="Backspace" >DEL</button>
                     </div>
                     <div class="col-2">
-                        <button class="operator" data-key="(">(</button>
+                        <button class="clear bold" data-key="Delete" >AC</button>
                     </div>
                     <div class="col-2">
-                        <button class="operator" data-key=")">)</button>
+                        <button class="operator" data-key="m">mod</button>
                     </div>
                     <div class="col-2 pl-0">
                         <button class="operand" data-key="7">7</button>
@@ -49,19 +49,22 @@
                     <div class="col-2">
                         <button class="operand" data-key="3">3</button>
                     </div>
-                    <div class="col-4 pl-0">
+                    <div class="col-2 pl-0">
                         <button class="operand" data-key="0">0</button>
                     </div>
                     <div class="col-2">
-                        <button class="operand" data-key=".">.</button>
+                        <button class="operator" data-key=".">.</button>
+                    </div>
+                    <div class="col-2">
+                        <button class="operator" data-key="%">%</button>
                     </div>
                 </div>
                 <div class="operators col-2 grid">
-                    <div class="col-3">
-                        <button class="operator" data-key="%">%</button>
-                    </div>
                     <div class="col-3 pr-0">
-                        <button class="operator" data-key="m">mod</button>
+                        <button class="operator" data-key="(">(</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="operator" data-key=")">)</button>
                     </div>
                     <div class="col-3">
                         <!-- Could not figure out how to handle "Dead" key ^, use "e" instead -->
@@ -83,7 +86,7 @@
                         <button class="operator" data-key="-">&minus;</button>
                     </div>
                     <div class="col pr-0">
-                        <button class="operator" data-key="Enter">=</button>
+                        <button class="equal" data-key="Enter">=</button>
                     </div>
                 </div>
             </div>

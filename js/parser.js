@@ -16,9 +16,11 @@
 
 import tokens from "./lexer.js";
 import exprs from "./expr.js";
+import exceptions from "./exceptions.js";
 /*
 const tokens = require("./lexer");
 const exprs = require("./expr");
+const exceptions = require("./exceptions.js");
 */
 
 class Parser {
@@ -45,7 +47,7 @@ class Parser {
         this.current = 0;
         const result = this.expression();
         if (this.endReached() === false) {
-            throw "Unexpected symbol !";
+            throw new exceptions.UnexpectedTokenException("Unexpected symbol !")
         }
 
         return result;
@@ -110,7 +112,7 @@ class Parser {
     postfix() {
         // %
         let expr = this.primary();
-        while(this.match(tokens.TOKEN_TYPES.percent)) {
+        while (this.match(tokens.TOKEN_TYPES.percent)) {
             expr = new exprs.Postfix(this.previous(), expr);
         }
 
@@ -136,7 +138,7 @@ class Parser {
             return new exprs.Grouping(expr);
         }
 
-        throw "Expected expression.";
+        throw new exceptions.ExpectedTokenException("Expected expression.");
     }
 
     match(...tokenTypes) {
@@ -160,7 +162,9 @@ class Parser {
 
     consumeExpected(tokenType, error = "") {
         if (this.peek().tokenType !== tokenType) {
-            throw `Failed to find expected token ${tokenType.name}.`;
+                throw new exceptions.expectedToken(error != "" 
+                    ? error 
+                    : `Failed to find expected token ${tokenType.name}.`);
         }
         return this.advance();
     }

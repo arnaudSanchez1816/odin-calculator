@@ -1,9 +1,11 @@
 import ParserModule from './parser.js';
 import LexerModule from './lexer.js';
+import ExceptionsModule from './exceptions.js';
 
 const buttons = Array.from(document.querySelectorAll("button"));
 const inputField = document.querySelector("#inputField");
 const parser = new ParserModule.Parser();
+const errorTextContainer = document.querySelector("#input-error");
 let errorDisplayed = false;
 
 document.addEventListener("keydown", function(event) {
@@ -21,6 +23,7 @@ buttons.forEach(x => {
 function processKey(key) {
     // If an error was displayed, reset the text content
     if(errorDisplayed) {
+        errorTextContainer.textContent = "";
         inputField.textContent = "";
         errorDisplayed = false;
     }
@@ -28,13 +31,25 @@ function processKey(key) {
     const inputFieldContent = inputField.textContent;
     if(key === "Enter") {
         try {
+            if(inputFieldContent === "") {
+                return;
+            }
+
             const expression = parser.parseString(inputField.textContent);
             const result = expression.evaluate();
             inputField.textContent = +result.toFixed(9);
         }
         catch (exception) {
             console.error(exception);
-            inputField.textContent = "Error";
+            let errorString = exception.message;
+            if(exception instanceof ExceptionsModule.ExpectedTokenException 
+                || exception instanceof ExceptionsModule.UnexpectedTokenException) {
+                errorString = "Malformed expression";
+            }
+            // Incase error is not of the expected type
+            errorString = errorString === "" ? exception : errorString;
+
+            errorTextContainer.textContent = errorString;
             errorDisplayed = true;
         }
         return true;

@@ -1,4 +1,5 @@
 const Parser = require("../js/parser");
+const Exceptions = require("../js/exceptions");
 
 // TODO : fix duplication 
 describe("Expressions evaluations", () => {
@@ -86,7 +87,7 @@ describe("Expressions evaluations", () => {
             return expression.evaluate();
         }
 
-        expect(evaluateFunc).toThrow("Division by zero is undefined");
+        expect(evaluateFunc).toThrow(Exceptions.DivisionByZeroException);
     });
 
     test("1 mod 2 = 1", () => {
@@ -117,7 +118,7 @@ describe("Expressions evaluations", () => {
             return expression.evaluate();
         }
 
-        expect(evaluateFunc).toThrow("Division by zero is undefined");
+        expect(evaluateFunc).toThrow(Exceptions.DivisionByZeroException);
     });
 
     test("2^2 = 4", () => {
@@ -169,7 +170,7 @@ describe("Expressions evaluations", () => {
             return expression.evaluate();
         }
 
-        expect(evaluateFunc).toThrow("Imaginary numbers unsupported");
+        expect(evaluateFunc).toThrow(Exceptions.ImaginaryNumberException);
     });
 
     test("10*(1+9) = 100", () => evaluateInput("10*(1+9)", 100));

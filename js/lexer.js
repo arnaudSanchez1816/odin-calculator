@@ -1,3 +1,7 @@
+import exceptions from "./exceptions.js";
+
+//const exceptions = require("./exceptions.js");
+
 /**
  * Create a token of the given type.
  * @param {TokenType} tokenType - the token type of the token
@@ -167,7 +171,7 @@ const TOKEN_TYPES = {
         name: "TOKEN_DIVIDE",
         binary: function (left, right) {
             if(right === 0) {
-                throw "Division by zero is undefined";
+                throw new exceptions.DivisionByZeroException();
             }
 
             return left / right;
@@ -183,7 +187,7 @@ const TOKEN_TYPES = {
         name: "TOKEN_SQRT",
         unary: function (value) {
             if(value < 0) {
-                throw new "Imaginary numbers unsupported";
+                throw new exceptions.ImaginaryNumberException();
             }
 
             return Math.sqrt(value);
@@ -199,7 +203,7 @@ const TOKEN_TYPES = {
         name: "TOKEN_MODULO",
         binary: function (left, right) {
             if(right === 0) {
-                throw "Division by zero is undefined";
+                throw new exceptions.DivisionByZeroException();
             }
 
             return left % right;
